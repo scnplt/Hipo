@@ -1,12 +1,15 @@
 package dev.sertan.hipoproject.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import dev.sertan.hipoproject.R
+import androidx.appcompat.app.AppCompatActivity
+import dev.sertan.hipoproject.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+internal class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 }
