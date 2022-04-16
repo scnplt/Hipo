@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Hipo</string>
+    <string name="add_new_member">Add new member</string>
+    <string name="members">Members</string>
+</resources>
