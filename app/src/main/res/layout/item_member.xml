@@ -11,6 +11,7 @@
     app:contentPadding="@dimen/size_5">
 
     <TextView
+        android:id="@+id/textViewMemberName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?attr/textAppearanceBody1"
