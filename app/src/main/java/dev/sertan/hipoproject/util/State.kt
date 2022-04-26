@@ -1,7 +1,7 @@
 package dev.sertan.hipoproject.util
 
 internal sealed class State<out T>(
-    val value: T? = null,
+    val data: T? = null,
     val exception: Throwable? = null
 ) {
     val isIdle get() = this is Idle
@@ -11,7 +11,7 @@ internal sealed class State<out T>(
 
     object Idle : State<Nothing>()
     object Loading : State<Nothing>()
-    data class Success<T>(val data: T?) : State<T>(data)
+    data class Success<T>(val d: T?) : State<T>(data = d)
     data class Failure(val e: Throwable?) : State<Nothing>(exception = e)
 
     companion object {
