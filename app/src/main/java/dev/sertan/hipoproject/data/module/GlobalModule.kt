@@ -21,20 +21,20 @@ internal object GlobalModule {
     @Singleton
     fun getMoshi(): Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
 
+    @Provides
+    @Singleton
+    fun getJsonAdapter(moshi: Moshi): JsonAdapter<ServiceResponse> {
+        return moshi.adapter(ServiceResponse::class.java)
+    }
 
     @Provides
     @Singleton
-    fun getHipoApiService(moshi: Moshi): HipoService {
+    fun getHipoService(moshi: Moshi): HipoService {
         val converterFactory = MoshiConverterFactory.create(moshi)
         return Retrofit.Builder()
             .baseUrl(HipoService.BASE_URL)
             .addConverterFactory(converterFactory)
             .build().create(HipoService::class.java)
     }
-
-    @Provides
-    @Singleton
-    fun getJsonAdapterForServiceResponse(moshi: Moshi): JsonAdapter<ServiceResponse> =
-        moshi.adapter(ServiceResponse::class.java)
 
 }
