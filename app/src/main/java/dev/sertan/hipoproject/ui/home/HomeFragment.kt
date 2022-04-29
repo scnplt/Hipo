@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -61,8 +62,35 @@ internal class HomeFragment :
         return false
     }
 
-    private fun subscribeUi() {
-        viewModel.members.observe(viewLifecycleOwner) { memberAdapter.data = it ?: emptyList() }
+    private fun subscribeUi() = viewModel.serviceResponse.observe(viewLifecycleOwner) { state ->
+        val showProgressIndicator = {
+            binding.buttonAddMember.visibility = View.GONE
+            binding.nestedScrollView.visibility = View.GONE
+            binding.progressIndicator.visibility = View.VISIBLE
+        }
+
+        val hideProgressIndicator = {
+            binding.progressIndicator.visibility = View.GONE
+            binding.buttonAddMember.visibility = View.VISIBLE
+            binding.nestedScrollView.visibility = View.VISIBLE
+        }
+
+        when {
+            state.isLoading -> showProgressIndicator()
+            state.isSuccess -> {
+                memberAdapter.data = state.data?.members ?: emptyList()
+                hideProgressIndicator()
+            }
+            state.isFailure -> {
+                hideProgressIndicator()
+                Toast.makeText(
+                    requireContext(),
+                    state?.exception?.localizedMessage ?: return@observe,
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            else -> hideProgressIndicator()
+        }
     }
 
     override fun onDestroyView() {

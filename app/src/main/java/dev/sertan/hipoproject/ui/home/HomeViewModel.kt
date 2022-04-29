@@ -1,7 +1,5 @@
 package dev.sertan.hipoproject.ui.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
@@ -12,11 +10,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class HomeViewModel @Inject constructor(private val repo: HipoRepository) : ViewModel() {
-    private val serviceResponse = repo.responseState.asLiveData(viewModelScope.coroutineContext)
-    val members: LiveData<List<Member>> = Transformations.map(serviceResponse) { it.data?.members }
+    val serviceResponse = repo.responseState.asLiveData(viewModelScope.coroutineContext)
 
     fun addMember(member: Member) {
-        val newMemberList = (members.value ?: emptyList()) + member
+        val newMemberList = (serviceResponse.value?.data?.members ?: emptyList()) + member
         repo.updateMembers(newMemberList)
     }
 }
