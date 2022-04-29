@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import com.squareup.picasso.Picasso
 import dev.sertan.hipoproject.R
 import dev.sertan.hipoproject.databinding.FragmentMemberBinding
 

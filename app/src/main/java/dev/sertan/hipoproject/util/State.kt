@@ -15,7 +15,6 @@ internal sealed class State<out T>(
     data class Failure(val e: Throwable?) : State<Nothing>(exception = e)
 
     companion object {
-        fun idle(): Idle = Idle
         fun loading(): Loading = Loading
         fun failure(e: Throwable? = null): Failure = Failure(e)
         fun <T> success(data: T? = null): Success<T> = Success(data)
