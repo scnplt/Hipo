@@ -1,0 +1,16 @@
+{
+  "company": "Hipo",
+  "team": "Android",
+  "members": [
+    {
+      "name": "Sertan Canpolat",
+      "age": 22,
+      "location": "Elazığ",
+      "github": "scnplt",
+      "hipo": {
+        "position": "Intern",
+        "years_in_hipo": 0
+      }
+    }
+  ]
+}
